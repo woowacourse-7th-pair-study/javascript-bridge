@@ -12,7 +12,7 @@ class BridgeGame {
 
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(size, numberGenerator);
-    this.#gameClear = false;
+    this.#gameClear = '실패';
     this.#round = 1;
     this.#index = 0;
   }
@@ -36,8 +36,8 @@ class BridgeGame {
   }
 
   getResult() {
-    if (this.#index === this.#bridge.length) this.#gameClear = true;
-    return { round: this.#round, result: this.#gameClear };
+    if (this.#index === this.#bridge.length) this.#gameClear = '성공';
+    return { round: this.#round, clear: this.#gameClear };
   }
 }
 
