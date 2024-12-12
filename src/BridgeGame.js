@@ -6,6 +6,7 @@ import BridgeRandomNumberGenerator from './BridgeRandomNumberGenerator.js';
  */
 class BridgeGame {
   #bridge;
+  #currentPosition;
   /**
    * 사용자가 칸을 이동할 때 사용하는 메서드
    * <p>
@@ -16,8 +17,11 @@ class BridgeGame {
       size,
       BridgeRandomNumberGenerator.generate,
     );
+    this.#currentPosition = 0;
+  }
 
-    console.log(this.#bridge);
+  initCondition() {
+    this.#currentPosition = 0;
   }
 
   move() {}

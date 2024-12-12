@@ -5,14 +5,16 @@ import Parser from '../lib/Parser.js';
 import Validator from '../lib/Validator.js';
 
 class Controller {
+  #bridgeGame;
+
   async start() {
     OutputView.printStartMessage();
 
     const bridgeSize = await this.#getValidatedBridgeSizeInput();
 
-    const bridgeGame = new BridgeGame(bridgeSize);
+    this.#bridgeGame = new BridgeGame(bridgeSize);
 
-    const movingInput = await this.#getValidatedMovingInput();
+    await this.#playGame(bridgeSize);
 
     const restartInput = await this.#getValidatedGameCommandInput();
   }
@@ -40,6 +42,15 @@ class Controller {
 
       return input;
     });
+  }
+
+  async #playGame(size) {
+    this.#bridgeGame.initCondition();
+    for (let round = 0; round < size; round++) {
+      const movingInput = await this.#getValidatedMovingInput();
+
+      console.log(movingInput);
+    }
   }
 }
 
