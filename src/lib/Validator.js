@@ -10,16 +10,18 @@ class Validator {
   }
 
   static validateMovingInput(input) {
-    this.#checkIsContainMovingInput(
+    this.#checkIsInputContainRules(
       [RULE.moveInput.down, RULE.moveInput.up],
       input,
+      ERROR_MESSAGE.notInMovingInput,
     );
   }
 
   static validateGameCommandInput(input) {
-    this.#checkIsContainGameCommandInput(
+    this.#checkIsInputContainRules(
       [RULE.restartInput.restart, RULE.restartInput.end],
       input,
+      ERROR_MESSAGE.notInGameCommand,
     );
   }
 
@@ -36,12 +38,8 @@ class Validator {
     if (value < min || value > max) throwWoowaError(ERROR_MESSAGE.notInRange);
   }
 
-  static #checkIsContainMovingInput(rules, value) {
-    if (!rules.includes(value)) throwWoowaError(ERROR_MESSAGE.notInMovingInput);
-  }
-
-  static #checkIsContainGameCommandInput(rules, value) {
-    if (!rules.includes(value)) throwWoowaError(ERROR_MESSAGE.notInGameCommand);
+  static #checkIsInputContainRules(rules, value, errorMessage) {
+    if (!rules.includes(value)) throwWoowaError(errorMessage);
   }
 }
 
