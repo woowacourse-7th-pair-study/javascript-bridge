@@ -1,3 +1,4 @@
+import BridgeGame from '../BridgeGame.js';
 import InputView from '../InputView.js';
 import OutputView from '../OutputView.js';
 import Parser from '../lib/Parser.js';
@@ -8,6 +9,8 @@ class Controller {
     OutputView.printStartMessage();
 
     const bridgeSize = await this.#getValidatedBridgeSizeInput();
+
+    const bridgeGame = new BridgeGame(bridgeSize);
 
     const movingInput = await this.#getValidatedMovingInput();
 
