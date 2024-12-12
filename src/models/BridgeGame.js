@@ -60,7 +60,6 @@ class BridgeGame {
       else this.#userBridge[1].push('O'); // 아래 칸에 'O' 처리
       this.#userBridge[0].push(' '); // 선택하지 않은 위 칸에 공백
     }
-    // console.log(this.#userBridge);
   }
 
   /**
