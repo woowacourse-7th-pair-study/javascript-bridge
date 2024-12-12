@@ -1,26 +1,44 @@
-const BridgeMaker = require();
+import BridgeMaker from '../BridgeMaker.js';
+import numberGenerator from '../util/numberGenerator.js';
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
  */
 class BridgeGame {
   #bridge;
-  #playerPosition;
+  #gameClear;
+  #round;
+  #index;
 
-  constructor(size) {}
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  move() {}
+  constructor(size) {
+    this.#bridge = BridgeMaker.makeBridge(size, numberGenerator);
+    this.#gameClear = false;
+    this.#round = 1;
+    this.#index = 0;
+  }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
-  retry() {}
+  move(nextPosition) {
+    const moveResult = this.#canMove(nextPosition);
+    this.#index += 1;
+
+    return moveResult;
+  }
+
+  #canMove(nextPosition) {
+    if (this.#bridge[this.#index] === nextPosition) return 'O';
+
+    return 'X';
+  }
+
+  retry() {
+    this.#round += 1;
+    this.#index = 0;
+  }
+
+  getResult() {
+    if (this.#index === this.#bridge.length) this.#gameClear = true;
+    return { round: this.#round, result: this.#gameClear };
+  }
 }
 
-module.exports = BridgeGame;
+export default BridgeGame;
