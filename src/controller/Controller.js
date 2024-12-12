@@ -52,11 +52,11 @@ class Controller {
       const isMoveSuccess = this.#bridgeGame.move(movingInput);
 
       if (!isMoveSuccess) {
-        OutputView.printMap();
+        OutputView.printMap(this.#bridgeGame.getCurrentMap());
         break;
       }
 
-      OutputView.printMap();
+      OutputView.printMap(this.#bridgeGame.getCurrentMap());
     }
   }
 }

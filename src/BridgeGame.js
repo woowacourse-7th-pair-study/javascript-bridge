@@ -38,7 +38,7 @@ class BridgeGame {
       ]);
       this.#movingMap.set(this.#getOppositeMovingInput(movingInput), [
         ...this.#movingMap.get(this.#getOppositeMovingInput(movingInput)),
-        '',
+        ' ',
       ]);
       return true;
     }
@@ -49,7 +49,7 @@ class BridgeGame {
     ]);
     this.#movingMap.set(this.#getOppositeMovingInput(movingInput), [
       ...this.#movingMap.get(this.#getOppositeMovingInput(movingInput)),
-      '',
+      ' ',
     ]);
     return false;
   }
@@ -58,6 +58,13 @@ class BridgeGame {
     if (movingInput === RULE.moveInput.up) return RULE.moveInput.down;
 
     return RULE.moveInput.up;
+  }
+
+  getCurrentMap() {
+    return [
+      [...this.#movingMap.get(RULE.moveInput.up)],
+      [...this.#movingMap.get(RULE.moveInput.down)],
+    ];
   }
 
   retry() {}
