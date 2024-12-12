@@ -1,5 +1,6 @@
 import { Console } from '@woowacourse/mission-utils';
 import { CONSOLE_MESSAGE } from './constant/message.js';
+import { getGameSuccessString } from './util/getGameSuccessString.js';
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -25,7 +26,7 @@ const OutputView = {
     this.printMap(currentMap);
 
     Console.print(
-      `\n${CONSOLE_MESSAGE.successMessage} ${isGameSuccess ? '성공' : '실패'}`,
+      `\n${CONSOLE_MESSAGE.successMessage} ${getGameSuccessString(isGameSuccess)}`,
     );
     Console.print(`${CONSOLE_MESSAGE.tryCountMessage} ${tryCount}`);
   },
