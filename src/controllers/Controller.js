@@ -4,13 +4,13 @@ import validateBridgeSize from '../validations/validateBridgeSize.js';
 import parser from '../utils/parser.js';
 import validateUserResponse from '../validations/validateUserResponse.js';
 import { GAME_COMMAND_RESPONSE, MOVING_RESPONSE } from '../constants/constants.js';
+import BridgeGame from '../models/BridgeGame.js';
 
 class Controller {
   async start() {
     OutputView.printStartMessage();
     const bridgeSize = await this.#getValidatedBridgeSize();
-
-
+    const bridgeGame = new BridgeGame(bridgeSize);
 
     // const moving = await this.#getValidatedMoving();
     // const gameCommand = await this.#getValidatedGameCommand();
