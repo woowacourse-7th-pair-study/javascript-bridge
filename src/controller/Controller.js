@@ -5,6 +5,8 @@ import Player from '../model/Player.js';
 
 import validateSize from '../util/validateSize.js';
 import validateMove from '../util/validateMove.js';
+import validateCommand from '../util/validateCommand.js';
+import tryInput from '../util/tryInput.js';
 
 class Controller {
   #bridgeGame;
@@ -17,7 +19,7 @@ class Controller {
   async init() {
     OutputView.printGreet();
 
-    const size = await this.#readSize();
+    const size = await tryInput(() => this.#readSize());
     this.#bridgeGame = new BridgeGame(size);
     await this.#moveProcess(size);
     const finalResult = this.#bridgeGame.getResult();
@@ -27,19 +29,20 @@ class Controller {
   async #moveProcess(size) {
     let tryCount = size;
 
-    while (tryCount) {
+    while (tryCount > 0) {
       const moveResult = await this.#move();
       const canMoveAgain = this.#checkGameOver(moveResult);
 
       if (!canMoveAgain) {
-        const command = await this.#readCommand();
+        const command = await tryInput(() => this.#readCommand());
         if (command === 'Q') {
           tryCount = 0;
           break;
         } else {
           this.#bridgeGame.retry();
           this.#player.retry();
-          return await this.#moveProcess(size);
+          tryCount = size;
+          continue;
         }
       }
 
@@ -54,31 +57,8 @@ class Controller {
     return true;
   }
 
-  async #readSize() {
-    try {
-      const size = await InputView.readBridgeSize();
-      validateSize(size);
-      return size;
-    } catch (e) {
-      OutputView.printError(e.message);
-      return await this.#readSize();
-    }
-  }
-
-  async #readMove() {
-    try {
-      const moveTo = await InputView.readMoving();
-      validateMove(moveTo);
-
-      return moveTo;
-    } catch (e) {
-      OutputView.printError(e.message);
-      return await this.#readMove();
-    }
-  }
-
   async #move() {
-    const moveTo = await this.#readMove();
+    const moveTo = await tryInput(() => this.#readMove());
     const moveResult = this.#bridgeGame.move(moveTo);
 
     this.#player.updatePosition(moveResult, moveTo);
@@ -87,15 +67,25 @@ class Controller {
     return moveResult;
   }
 
-  async #readCommand() {
-    try {
-      const command = await InputView.readGameCommand();
+  async #readSize() {
+    const size = await InputView.readBridgeSize();
+    validateSize(size);
 
-      return command;
-    } catch (e) {
-      OutputView.printError(e.message);
-      return await this.#readCommand();
-    }
+    return size;
+  }
+
+  async #readMove() {
+    const moveTo = await InputView.readMoving();
+    validateMove(moveTo);
+
+    return moveTo;
+  }
+
+  async #readCommand() {
+    const command = await InputView.readGameCommand();
+    validateCommand(command);
+
+    return command;
   }
 }
 
