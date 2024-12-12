@@ -1,5 +1,17 @@
+import Controller from './controller/Controller.js';
+
 class App {
-  play() {}
+  #controller;
+
+  constructor() {
+    this.#controller = new Controller();
+  }
+
+  async play() {
+    await this.#controller.init();
+  }
 }
 
-module.exports = App;
+export default App;
+const app = new App();
+app.play();
