@@ -12,6 +12,11 @@ class Controller {
     const bridgeSize = await this.#getValidatedBridgeSize();
     const bridgeGame = new BridgeGame(bridgeSize);
     await this.#bridgeGameSystem(bridgeSize, bridgeGame);
+
+    const userBridge = bridgeGame.getUserBridge();
+    const hasTotalX = bridgeGame.checkTotalCannotMove();
+    const tryCount = bridgeGame.getTryCount();
+    OutputView.printResult(userBridge, hasTotalX, tryCount);
   }
 
   async #bridgeGameSystem(bridgeSize, bridgeGame) {

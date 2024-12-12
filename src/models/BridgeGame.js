@@ -18,6 +18,10 @@ class BridgeGame {
     return this.#userBridge;
   }
 
+  getTryCount() {
+    return this.#tryCount;
+  }
+
   /**
    * 사용자가 선택한 칸이 이동할 수 없는 칸인지 확인
    * 현재 다리 위치에 'X'가 포함되어 있는지 확인
@@ -26,6 +30,16 @@ class BridgeGame {
    */
   checkCannotMove(count) {
     return this.#userBridge[0][count] === 'X' || this.#userBridge[1][count] === 'X';
+  }
+
+  /**
+   * 현재 사용자가 선택한 칸 전체에서 'X'가 포함되어 있는지 확인
+   * @returns {boolean}
+   */
+  checkTotalCannotMove() {
+    return this.#userBridge.some((eachBridge) => {
+      return eachBridge.includes('X');
+    });
   }
 
   /**
