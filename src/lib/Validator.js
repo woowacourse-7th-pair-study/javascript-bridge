@@ -9,8 +9,15 @@ class Validator {
     this.#checkIsInRange(input, RULE.bridgeSize.min, RULE.bridgeSize.max);
   }
 
+  static validateMovingInput(input) {
+    this.#checkIsContainMovingInput(
+      [RULE.moveInput.down, RULE.moveInput.up],
+      input,
+    );
+  }
+
   static #checkIsNumber(value) {
-    if (!Number.isNaN(Number(value))) throwWoowaError(ERROR_MESSAGE.notNumber);
+    if (Number.isNaN(Number(value))) throwWoowaError(ERROR_MESSAGE.notNumber);
   }
 
   static #checkIsPositive(value) {
@@ -18,7 +25,7 @@ class Validator {
   }
 
   static #checkIsInteger(value) {
-    if (Number.isInteger(Number(value)))
+    if (!Number.isInteger(Number(value)))
       throwWoowaError(ERROR_MESSAGE.notInteger);
   }
 
@@ -26,14 +33,12 @@ class Validator {
     if (value < min || value > max) throwWoowaError(ERROR_MESSAGE.notInRange);
   }
 
-  static #checkIsDuplicate(values) {
-    if (new Set(values).size !== values.length)
-      throwWoowaError(ERROR_MESSAGE.duplicate);
+  static #checkIsContainMovingInput(rules, value) {
+    if (!rules.includes(value)) throwWoowaError(ERROR_MESSAGE.notInMovingInput);
   }
 
-  static #checkMoreThanMaxLength(values, maxLength) {
-    if (values.length > maxLength)
-      throwWoowaError(ERROR_MESSAGE.moreThanMaxLength);
+  static #checkIsContainGameCommand(rules, value) {
+    if (!rules.includes(value)) throwWoowaError(ERROR_MESSAGE.notInGameCommand);
   }
 }
 

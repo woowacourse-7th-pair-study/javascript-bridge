@@ -7,18 +7,27 @@ class Controller {
   async start() {
     OutputView.printStartMessage();
 
-    const bridgeSize = await this.#getValidatedBridgeSize();
+    const bridgeSize = await this.#getValidatedBridgeSizeInput();
 
-    InputView.readMoving()((input) => input);
+    const movingInput = await this.#getValidatedMovingInput();
+
     InputView.readGameCommand()((input) => input);
   }
 
-  #getValidatedBridgeSize() {
+  #getValidatedBridgeSizeInput() {
     return InputView.readBridgeSize()((input) => {
       const bridgeSize = Parser.stringToNumber(input);
       Validator.validateBridgeSizeInput(bridgeSize);
 
       return bridgeSize;
+    });
+  }
+
+  #getValidatedMovingInput() {
+    return InputView.readMoving()((input) => {
+      Validator.validateMovingInput(input);
+
+      return input;
     });
   }
 }
