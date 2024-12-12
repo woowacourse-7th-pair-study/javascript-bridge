@@ -15,6 +15,6 @@ export const ERROR_MESSAGE = Object.freeze({
   notNumber: '다리 길이는 숫자로 입력해야 합니다.',
   notInteger: '다리 길이는 정수로 입력해야 합니다.',
   notInRange: `다리 길이는 ${RULE.bridgeSize.min} ~ ${RULE.bridgeSize.max} 사이로 입력해야 합니다.`,
-  notInMovingInput: `이동할 칸은 ${RULE.moveInput.down}, ${RULE.moveInput.up} 중 하나여야 합니다.`,
+  notInMovingInput: `이동할 칸은 ${RULE.moveInput.up}, ${RULE.moveInput.down} 중 하나여야 합니다.`,
   notInGameCommand: `게임을 다시 시도할지 여부는 ${RULE.restartInput.restart}, ${RULE.restartInput.end} 중 하나여야 합니다.`,
 });

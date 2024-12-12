@@ -33,7 +33,8 @@ const expectLogContains = (received, logs) => {
     expect(received).toEqual(expect.stringContaining(log));
   });
 };
-const runException = async (inputs) => {
+
+export const runException = async (inputs) => {
   mockQuestions(inputs);
   const logSpy = getLogSpy();
   mockRandoms([1, 0, 1]);
