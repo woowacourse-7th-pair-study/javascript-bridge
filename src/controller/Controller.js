@@ -8,8 +8,7 @@ class Controller {
     InputView.readBridgeSize()((input) => input);
 
     InputView.readMoving()((input) => input);
-
-    // InputView.get();
+    InputView.readGameCommand()((input) => input);
   }
 }
 
