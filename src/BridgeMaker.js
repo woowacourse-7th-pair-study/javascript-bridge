@@ -12,10 +12,8 @@ const BridgeMaker = {
   makeBridge(size, generateRandomNumber) {
     const bridge = [];
     for (let i = 0; i < size; i++) {
-      const spaces = [0, 0];
       const randomNumber = generateRandomNumber();
-      spaces[randomNumber] = 1;
-      if (randomNumber === 0) {
+      if (randomNumber === 1) {
         bridge.push(RULE.moveInput.up);
         continue;
       }
