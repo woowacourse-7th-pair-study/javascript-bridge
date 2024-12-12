@@ -1,7 +1,9 @@
 const InputView = require('../view/InputView.js');
+const OutputView = require('../view/OutputView.js');
 
 class Controller {
   init() {
+    OutputView.printGreet();
     this.#readSize();
   }
 
