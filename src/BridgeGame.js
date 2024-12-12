@@ -9,11 +9,8 @@ class BridgeGame {
   #bridge;
   #currentPosition;
   #tryCount;
-  /**
-   * 사용자가 칸을 이동할 때 사용하는 메서드
-   * <p>
-   * 이동을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  #movingMap;
+
   constructor(size) {
     this.#bridge = BridgeMaker.makeBridge(
       size,
@@ -21,6 +18,10 @@ class BridgeGame {
     );
     this.#currentPosition = -1;
     this.#tryCount = 0;
+    this.#movingMap = new Map([
+      [RULE.moveInput.up, []],
+      [RULE.moveInput.down, []],
+    ]);
   }
 
   initCondition() {
@@ -30,15 +31,35 @@ class BridgeGame {
 
   move(movingInput) {
     this.#currentPosition += 1;
+    if (movingInput === this.#bridge[this.#currentPosition]) {
+      this.#movingMap.set(movingInput, [
+        ...this.#movingMap.get(movingInput),
+        'O',
+      ]);
+      this.#movingMap.set(this.#getOppositeMovingInput(movingInput), [
+        ...this.#movingMap.get(this.#getOppositeMovingInput(movingInput)),
+        '',
+      ]);
+      return true;
+    }
 
-    return movingInput === this.#bridge[this.#currentPosition];
+    this.#movingMap.set(movingInput, [
+      ...this.#movingMap.get(movingInput),
+      'X',
+    ]);
+    this.#movingMap.set(this.#getOppositeMovingInput(movingInput), [
+      ...this.#movingMap.get(this.#getOppositeMovingInput(movingInput)),
+      '',
+    ]);
+    return false;
   }
 
-  /**
-   * 사용자가 게임을 다시 시도할 때 사용하는 메서드
-   * <p>
-   * 재시작을 위해 필요한 메서드의 반환 값(return value), 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
-   */
+  #getOppositeMovingInput(movingInput) {
+    if (movingInput === RULE.moveInput.up) return RULE.moveInput.down;
+
+    return RULE.moveInput.up;
+  }
+
   retry() {}
 }
 
