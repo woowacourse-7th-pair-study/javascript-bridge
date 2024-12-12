@@ -34,7 +34,7 @@ class BridgeGame {
   }
 
   /**
-   * 현재 사용자가 선택한 칸 전체에서 'X'가 포함되어 있는지 확인
+   * 지금까지 사용자가 선택한 전체 칸에서 'X'가 포함되어 있는지 확인
    * @returns {boolean}
    */
   checkTotalCannotMove() {

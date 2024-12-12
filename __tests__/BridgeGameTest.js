@@ -32,4 +32,20 @@ describe('BridgeGame 클래스 테스트', () => {
     expect(bridgeGame.getUserBridge()).toEqual([ [], [] ]);
     expect(bridgeGame.getTryCount()).toBe(2);
   });
+
+  test.each([
+    [`'X'가 존재하여 true를 반환하는 경우`, [ 'U', 'D', 'D' ], true],
+    [`'X'가 존재하지 않아 false를 반환하는 경우`, [ 'U', 'D', 'U' ], false ],
+  ])('checkTotalCannotMove() 메서드 테스트: %s', (_, moving, expectedResponse) => {
+    // given
+    for (let count = 0; count < bridgeSize; count++) {
+      bridgeGame.move(count, moving[count]);
+    }
+
+    // when
+    const hasTotalX = bridgeGame.checkTotalCannotMove();
+
+    // then
+    expect(hasTotalX).toBe(expectedResponse);
+  });
 });
