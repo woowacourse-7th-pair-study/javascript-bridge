@@ -1,6 +1,6 @@
-const { Console } = require('@woowacourse/mission-utils');
+import { Console } from '@woowacourse/mission-utils';
 
-const OUTPUT_MESSAGE = require('../constant/output.js');
+import OUTPUT_MESSAGE from '../constant/output.js';
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -8,6 +8,10 @@ const OUTPUT_MESSAGE = require('../constant/output.js');
 const OutputView = {
   printGreet() {
     Console.print(OUTPUT_MESSAGE.greet);
+  },
+
+  printError(errorMessage) {
+    Console.print(errorMessage);
   },
   /**
    * 현재까지 이동한 다리의 상태를 정해진 형식에 맞춰 출력한다.
@@ -24,4 +28,4 @@ const OutputView = {
   printResult() {},
 };
 
-module.exports = OutputView;
+export default OutputView;
