@@ -27,7 +27,7 @@ class Controller {
       OutputView.printMap(bridgeGame.getUserBridge());
 
       // 현재 moving이 이동할 수 없는 칸인지 확인 ('X' 인지 확인)
-      hasX = bridgeGame.checkCannotMove(count);
+      hasX = bridgeGame.checkTotalCannotMove();
       if (hasX) break;
     }
     if (hasX) {

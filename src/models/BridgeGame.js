@@ -24,16 +24,6 @@ class BridgeGame {
   }
 
   /**
-   * 사용자가 선택한 칸이 이동할 수 없는 칸인지 확인
-   * 현재 다리 위치에 'X'가 포함되어 있는지 확인
-   * @param {number} count // 현재 다리 위치
-   * @returns {boolean}
-   */
-  checkCannotMove(count) {
-    return this.#userBridge[0][count] === 'X' || this.#userBridge[1][count] === 'X';
-  }
-
-  /**
    * 지금까지 사용자가 선택한 전체 칸에서 'X'가 포함되어 있는지 확인
    * @returns {boolean}
    */
