@@ -7,6 +7,7 @@ import Validator from '../lib/Validator.js';
 
 class Controller {
   #bridgeGame;
+  #isGameSuccess;
 
   async start() {
     OutputView.printStartMessage();
@@ -16,6 +17,8 @@ class Controller {
     this.#bridgeGame = new BridgeGame(bridgeSize);
 
     await this.#playGame(bridgeSize);
+
+    this.#printResult();
   }
 
   #getValidatedBridgeSizeInput() {
@@ -45,7 +48,7 @@ class Controller {
 
   async #playGame() {
     const bridgeSize = this.#bridgeGame.getBridgeSize();
-    let isGameSuccess = true;
+    this.#isGameSuccess = true;
     for (let round = 0; round < bridgeSize; round++) {
       const movingInput = await this.#getValidatedMovingInput();
 
@@ -53,25 +56,29 @@ class Controller {
 
       if (!isMoveSuccess) {
         OutputView.printMap(this.#bridgeGame.getCurrentMap());
-        isGameSuccess = false;
+        this.#isGameSuccess = false;
         break;
       }
 
       OutputView.printMap(this.#bridgeGame.getCurrentMap());
     }
 
-    this.#finishGame(isGameSuccess);
+    await this.#finishGame();
   }
 
-  async #finishGame(isGameSuccess) {
-    if (isGameSuccess) return;
+  async #finishGame() {
+    if (this.#isGameSuccess) return;
 
     const restartInput = await this.#getValidatedGameCommandInput();
 
     if (restartInput === RULE.restartInput.restart) {
       this.#bridgeGame.retry();
-      this.#playGame();
+      await this.#playGame();
     }
+  }
+
+  #printResult() {
+    OutputView.printResult(this.#bridgeGame.getCurrentMap());
   }
 }
 
