@@ -45,6 +45,7 @@ class Controller {
 
   async #playGame() {
     const bridgeSize = this.#bridgeGame.getBridgeSize();
+    let isGameSuccess = true;
     for (let round = 0; round < bridgeSize; round++) {
       const movingInput = await this.#getValidatedMovingInput();
 
@@ -52,16 +53,19 @@ class Controller {
 
       if (!isMoveSuccess) {
         OutputView.printMap(this.#bridgeGame.getCurrentMap());
+        isGameSuccess = false;
         break;
       }
 
       OutputView.printMap(this.#bridgeGame.getCurrentMap());
     }
 
-    this.#finishGame();
+    this.#finishGame(isGameSuccess);
   }
 
-  async #finishGame() {
+  async #finishGame(isGameSuccess) {
+    if (isGameSuccess) return;
+
     const restartInput = await this.#getValidatedGameCommandInput();
 
     if (restartInput === RULE.restartInput.restart) {
