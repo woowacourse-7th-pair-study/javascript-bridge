@@ -1,5 +1,5 @@
 import BridgeMaker from '../BridgeMaker.js';
-import numberGenerator from '../util/numberGenerator.js';
+import BridgeRandomNumberGenerator from '../BridgeRandomNumberGenerator.js';
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -11,7 +11,10 @@ class BridgeGame {
   #index;
 
   constructor(size) {
-    this.#bridge = BridgeMaker.makeBridge(size, numberGenerator);
+    this.#bridge = BridgeMaker.makeBridge(
+      size,
+      BridgeRandomNumberGenerator.generate,
+    );
     this.#gameClear = '실패';
     this.#round = 1;
     this.#index = 0;
