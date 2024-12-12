@@ -1,3 +1,5 @@
+import { Console } from '@woowacourse/mission-utils';
+
 export const repeatUtilComplete = (message) => async (validationCallback) => {
   try {
     const input = await Console.readLineAsync(`\n${message}`);

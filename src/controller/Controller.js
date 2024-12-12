@@ -1,9 +1,13 @@
-import { InputView, OutputView } from '../view/index.js';
+import InputView from '../InputView.js';
+import OutputView from '../OutputView.js';
 
 class Controller {
   async start() {
-    InputView.get();
-    OutputView.print();
+    OutputView.printStartMessage();
+
+    InputView.readBridgeSize()((input) => input);
+
+    // InputView.get();
   }
 }
 
