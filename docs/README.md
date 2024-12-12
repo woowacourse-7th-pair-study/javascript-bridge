@@ -39,8 +39,11 @@
     - [x] R 또는 Q 인지
 
 ## 테스트 코드
-  - [ ] 통합 테스트: 기능 및 예외 테스트
+  - [x] 통합 테스트: 기능 및 예외 테스트
   - [ ] 단위 테스트
+    - [x] BridgeGame 클래스 테스트
+    - [ ] validateBridgeSize 메서드 테스트
+    - [ ] validateUserResponse 메서드 테스트
 
 ## 기타
   - [ ] 함수 길이 10 제한
