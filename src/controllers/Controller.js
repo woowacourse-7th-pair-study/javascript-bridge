@@ -11,10 +11,27 @@ class Controller {
     OutputView.printStartMessage();
     const bridgeSize = await this.#getValidatedBridgeSize();
     const bridgeGame = new BridgeGame(bridgeSize);
+    await this.#bridgeGameSystem(bridgeSize, bridgeGame);
+  }
 
-    // const moving = await this.#getValidatedMoving();
-    // const gameCommand = await this.#getValidatedGameCommand();
+  async #bridgeGameSystem(bridgeSize, bridgeGame) {
+    let hasX = false;
+    for (let count = 0; count < bridgeSize; count++) {
+      const moving = await this.#getValidatedMoving();
+      bridgeGame.move(count, moving);
+      OutputView.printMap(bridgeGame.getUserBridge());
 
+      // 현재 moving이 이동할 수 없는 칸인지 확인 ('X' 인지 확인)
+      hasX = bridgeGame.checkCannotMove(count);
+      if (hasX) break;
+    }
+    if (hasX) {
+      const gameCommand = await this.#getValidatedGameCommand();
+      if (gameCommand === 'R') {
+        bridgeGame.retry();
+        await this.#bridgeGameSystem(bridgeSize, bridgeGame);
+      }
+    }
   }
 
   async #getValidatedBridgeSize() {
