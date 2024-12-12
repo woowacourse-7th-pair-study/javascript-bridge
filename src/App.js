@@ -1,5 +1,9 @@
+import Controller from './controllers/Controller.js';
+
 class App {
-  play() {}
+  async run() {
+    await new Controller().start();
+  }
 }
 
-module.exports = App;
+export default App;
