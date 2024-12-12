@@ -22,4 +22,14 @@ describe('BridgeGame 클래스 테스트', () => {
     // then
     expect(bridgeGame.getUserBridge()).toEqual(expectBridge);
   });
+
+  test('retry() 메서드 테스트', () => {
+    // given
+    // when
+    bridgeGame.retry();
+
+    // then
+    expect(bridgeGame.getUserBridge()).toEqual([ [], [] ]);
+    expect(bridgeGame.getTryCount()).toBe(2);
+  });
 });
