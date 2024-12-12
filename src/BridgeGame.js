@@ -62,15 +62,19 @@ class BridgeGame {
     ];
   }
 
-  getBridgeSize() {
-    return this.#bridge.length;
-  }
-
   retry() {
     this.#currentPosition = -1;
     this.#tryCount += 1;
     this.#movingMap.set(RULE.moveInput.up, []);
     this.#movingMap.set(RULE.moveInput.down, []);
+  }
+
+  get bridgeSize() {
+    return this.#bridge.length;
+  }
+
+  get tryCount() {
+    return this.#tryCount;
   }
 }
 

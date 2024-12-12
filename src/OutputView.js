@@ -20,13 +20,14 @@ const OutputView = {
    * <p>
    * 출력을 위해 필요한 메서드의 인자(parameter)는 자유롭게 추가하거나 변경할 수 있다.
    */
-  printResult(currentMap, isGameSuccess) {
+  printResult(currentMap, isGameSuccess, tryCount) {
     Console.print(CONSOLE_MESSAGE.resultMessage);
     this.printMap(currentMap);
 
     Console.print(
-      `\n${CONSOLE_MESSAGE.successMessage}${isGameSuccess ? '성공' : '실패'}`,
+      `\n${CONSOLE_MESSAGE.successMessage} ${isGameSuccess ? '성공' : '실패'}`,
     );
+    Console.print(`${CONSOLE_MESSAGE.tryCountMessage} ${tryCount}`);
   },
 };
 
