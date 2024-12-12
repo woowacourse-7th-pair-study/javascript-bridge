@@ -49,7 +49,7 @@ class Controller {
     for (let round = 0; round < size; round++) {
       const movingInput = await this.#getValidatedMovingInput();
 
-      console.log(movingInput);
+      console.log(this.#bridgeGame.move(movingInput));
     }
   }
 }

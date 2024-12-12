@@ -1,5 +1,6 @@
 import BridgeMaker from './BridgeMaker.js';
 import BridgeRandomNumberGenerator from './BridgeRandomNumberGenerator.js';
+import { RULE } from './constant/rule.js';
 
 /**
  * 다리 건너기 게임을 관리하는 클래스
@@ -18,16 +19,20 @@ class BridgeGame {
       size,
       BridgeRandomNumberGenerator.generate,
     );
-    this.#currentPosition = 0;
+    this.#currentPosition = -1;
     this.#tryCount = 0;
   }
 
   initCondition() {
-    this.#currentPosition = 0;
+    this.#currentPosition = -1;
     this.#tryCount += 1;
   }
 
-  move() {}
+  move(movingInput) {
+    this.#currentPosition += 1;
+
+    return movingInput === this.#bridge[this.#currentPosition];
+  }
 
   /**
    * 사용자가 게임을 다시 시도할 때 사용하는 메서드

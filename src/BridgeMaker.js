@@ -1,3 +1,5 @@
+import { RULE } from './constant/rule.js';
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -13,8 +15,12 @@ const BridgeMaker = {
       const spaces = [0, 0];
       const randomNumber = generateRandomNumber();
       spaces[randomNumber] = 1;
+      if (randomNumber === 0) {
+        bridge.push(RULE.moveInput.up);
+        continue;
+      }
 
-      bridge.push(spaces);
+      bridge.push(RULE.moveInput.down);
     }
 
     return bridge;
