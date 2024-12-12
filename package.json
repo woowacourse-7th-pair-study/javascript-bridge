@@ -4,7 +4,7 @@
   "description": "우아한테크코스 프리코스 다리 건너기 게임 미션",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/App.js",
     "test": "jest --detectOpenHandles"
   },
   "devDependencies": {
