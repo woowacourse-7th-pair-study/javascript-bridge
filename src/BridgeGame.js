@@ -26,26 +26,15 @@ class BridgeGame {
 
   move(movingInput) {
     this.#currentPosition += 1;
+    const oppositeMovingInput = this.#getOppositeMovingInput(movingInput);
     if (movingInput === this.#bridge[this.#currentPosition]) {
-      this.#movingMap.set(movingInput, [
-        ...this.#movingMap.get(movingInput),
-        'O',
-      ]);
-      this.#movingMap.set(this.#getOppositeMovingInput(movingInput), [
-        ...this.#movingMap.get(this.#getOppositeMovingInput(movingInput)),
-        ' ',
-      ]);
+      this.#setMovingMap(movingInput, 'O');
+      this.#setMovingMap(oppositeMovingInput, ' ');
       return true;
     }
 
-    this.#movingMap.set(movingInput, [
-      ...this.#movingMap.get(movingInput),
-      'X',
-    ]);
-    this.#movingMap.set(this.#getOppositeMovingInput(movingInput), [
-      ...this.#movingMap.get(this.#getOppositeMovingInput(movingInput)),
-      ' ',
-    ]);
+    this.#setMovingMap(movingInput, 'X');
+    this.#setMovingMap(oppositeMovingInput, ' ');
     return false;
   }
 
@@ -53,6 +42,10 @@ class BridgeGame {
     if (movingInput === RULE.moveInput.up) return RULE.moveInput.down;
 
     return RULE.moveInput.up;
+  }
+
+  #setMovingMap(key, value) {
+    this.#movingMap.set(key, [...this.#movingMap.get(key), value]);
   }
 
   getCurrentMap() {
