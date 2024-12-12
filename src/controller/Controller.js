@@ -11,7 +11,7 @@ class Controller {
 
     const movingInput = await this.#getValidatedMovingInput();
 
-    InputView.readGameCommand()((input) => input);
+    const restartInput = await this.#getValidatedGameCommandInput();
   }
 
   #getValidatedBridgeSizeInput() {
@@ -26,6 +26,14 @@ class Controller {
   #getValidatedMovingInput() {
     return InputView.readMoving()((input) => {
       Validator.validateMovingInput(input);
+
+      return input;
+    });
+  }
+
+  #getValidatedGameCommandInput() {
+    return InputView.readGameCommand()((input) => {
+      Validator.validateGameCommandInput(input);
 
       return input;
     });

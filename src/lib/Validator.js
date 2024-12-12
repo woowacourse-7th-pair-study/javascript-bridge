@@ -16,12 +16,15 @@ class Validator {
     );
   }
 
-  static #checkIsNumber(value) {
-    if (Number.isNaN(Number(value))) throwWoowaError(ERROR_MESSAGE.notNumber);
+  static validateGameCommandInput(input) {
+    this.#checkIsContainGameCommandInput(
+      [RULE.restartInput.restart, RULE.restartInput.end],
+      input,
+    );
   }
 
-  static #checkIsPositive(value) {
-    if (Number(value) <= 0) throwWoowaError(ERROR_MESSAGE.notPositive);
+  static #checkIsNumber(value) {
+    if (Number.isNaN(Number(value))) throwWoowaError(ERROR_MESSAGE.notNumber);
   }
 
   static #checkIsInteger(value) {
@@ -37,7 +40,7 @@ class Validator {
     if (!rules.includes(value)) throwWoowaError(ERROR_MESSAGE.notInMovingInput);
   }
 
-  static #checkIsContainGameCommand(rules, value) {
+  static #checkIsContainGameCommandInput(rules, value) {
     if (!rules.includes(value)) throwWoowaError(ERROR_MESSAGE.notInGameCommand);
   }
 }
