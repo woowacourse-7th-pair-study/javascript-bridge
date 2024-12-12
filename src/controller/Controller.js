@@ -1,6 +1,7 @@
 import BridgeGame from '../BridgeGame.js';
 import InputView from '../InputView.js';
 import OutputView from '../OutputView.js';
+import { RULE } from '../constant/rule.js';
 import Parser from '../lib/Parser.js';
 import Validator from '../lib/Validator.js';
 
@@ -15,8 +16,6 @@ class Controller {
     this.#bridgeGame = new BridgeGame(bridgeSize);
 
     await this.#playGame(bridgeSize);
-
-    const restartInput = await this.#getValidatedGameCommandInput();
   }
 
   #getValidatedBridgeSizeInput() {
@@ -44,9 +43,9 @@ class Controller {
     });
   }
 
-  async #playGame(size) {
-    this.#bridgeGame.initCondition();
-    for (let round = 0; round < size; round++) {
+  async #playGame() {
+    const bridgeSize = this.#bridgeGame.getBridgeSize();
+    for (let round = 0; round < bridgeSize; round++) {
       const movingInput = await this.#getValidatedMovingInput();
 
       const isMoveSuccess = this.#bridgeGame.move(movingInput);
@@ -57,6 +56,17 @@ class Controller {
       }
 
       OutputView.printMap(this.#bridgeGame.getCurrentMap());
+    }
+
+    this.#finishGame();
+  }
+
+  async #finishGame() {
+    const restartInput = await this.#getValidatedGameCommandInput();
+
+    if (restartInput === RULE.restartInput.restart) {
+      this.#bridgeGame.retry();
+      this.#playGame();
     }
   }
 }

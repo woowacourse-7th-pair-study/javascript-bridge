@@ -17,16 +17,11 @@ class BridgeGame {
       BridgeRandomNumberGenerator.generate,
     );
     this.#currentPosition = -1;
-    this.#tryCount = 0;
+    this.#tryCount = 1;
     this.#movingMap = new Map([
       [RULE.moveInput.up, []],
       [RULE.moveInput.down, []],
     ]);
-  }
-
-  initCondition() {
-    this.#currentPosition = -1;
-    this.#tryCount += 1;
   }
 
   move(movingInput) {
@@ -67,7 +62,16 @@ class BridgeGame {
     ];
   }
 
-  retry() {}
+  getBridgeSize() {
+    return this.#bridge.length;
+  }
+
+  retry() {
+    this.#currentPosition = -1;
+    this.#tryCount += 1;
+    this.#movingMap.set(RULE.moveInput.up, []);
+    this.#movingMap.set(RULE.moveInput.down, []);
+  }
 }
 
 export default BridgeGame;
