@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { INPUT_MESSAGES } from '../constants/constants.js';
 
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
@@ -9,7 +10,7 @@ const InputView = {
    */
   readBridgeSize() {
     try {
-      return Console.readLineAsync('다리의 길이를 입력해주세요.\n');
+      return Console.readLineAsync(INPUT_MESSAGES.BRIDGE_SIZE);
     } catch (error) {
       throw new Error(error.message);
     }
@@ -20,7 +21,7 @@ const InputView = {
    */
   readMoving() {
     try {
-      return Console.readLineAsync('이동할 칸을 선택해주세요. (위: U, 아래: D)\n');
+      return Console.readLineAsync(INPUT_MESSAGES.MOVING);
     } catch (error) {
       throw new Error(error.message);
     }
@@ -31,7 +32,7 @@ const InputView = {
    */
   readGameCommand() {
     try {
-      return Console.readLineAsync('게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n');
+      return Console.readLineAsync(INPUT_MESSAGES.GAME_COMMAND);
     } catch (error) {
       throw new Error(error.message);
     }

@@ -46,6 +46,6 @@
     - [x] validateUserResponse 메서드 테스트
 
 ## 기타
+  - [x] 상수화
   - [ ] 함수 길이 10 제한
   - [ ] indent depth 2 제한
-  - [ ] 상수화

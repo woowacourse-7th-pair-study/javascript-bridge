@@ -3,7 +3,7 @@ import OutputView from '../views/OutputView.js';
 import validateBridgeSize from '../validations/validateBridgeSize.js';
 import parser from '../utils/parser.js';
 import validateUserResponse from '../validations/validateUserResponse.js';
-import { GAME_COMMAND_RESPONSE, MOVING_RESPONSE } from '../constants/constants.js';
+import { GAME_COMMAND_RESPONSE, MOVING_RESPONSE, RETRY } from '../constants/constants.js';
 import BridgeGame from '../models/BridgeGame.js';
 
 class Controller {
@@ -32,7 +32,7 @@ class Controller {
     }
     if (hasX) {
       const gameCommand = await this.#getValidatedGameCommand();
-      if (gameCommand === 'R') {
+      if (gameCommand === RETRY) {
         bridgeGame.retry();
         await this.#bridgeGameSystem(bridgeSize, bridgeGame);
       }

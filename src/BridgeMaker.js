@@ -1,3 +1,6 @@
+import { DOWN, UP } from './constants/constants.js';
+import BridgeRandomNumberGenerator from './utils/BridgeRandomNumberGenerator.js';
+
 /**
  * 다리의 길이를 입력 받아서 다리를 생성해주는 역할을 한다.
  */
@@ -11,10 +14,9 @@ const BridgeMaker = {
     let bridge = [];
     for (let count = 0; count < size; count++) {
       const randomNumber = generateRandomNumber();
-      if (randomNumber === 0) bridge.push('D');
-      if (randomNumber === 1) bridge.push('U');
+      if (randomNumber === BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE) bridge.push(DOWN);
+      if (randomNumber === BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE) bridge.push(UP);
     }
-    console.log(bridge);
     return bridge;
   },
 };

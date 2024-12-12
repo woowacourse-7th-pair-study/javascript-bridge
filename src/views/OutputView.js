@@ -1,4 +1,5 @@
 import { Console } from '@woowacourse/mission-utils';
+import { OUTPUT_LABELS, START_MESSAGE } from '../constants/constants.js';
 
 /**
  * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
@@ -8,7 +9,7 @@ const OutputView = {
    * 게임 시작 문구를 출력한다.
    */
   printStartMessage() {
-    Console.print('다리 건너기 게임을 시작합니다.\n');
+    Console.print(START_MESSAGE);
   },
 
   /**
@@ -42,14 +43,14 @@ const OutputView = {
    * @param {number} tryCount
    */
   printResult(userBridge, hasTotalX, tryCount) {
-    let successOrNot = '성공';
-    if (hasTotalX) successOrNot = '실패';
+    let successOrNot = OUTPUT_LABELS.SUCCESS;
+    if (hasTotalX) successOrNot = OUTPUT_LABELS.FAILED;
 
-    Console.print('최종 게임 결과');
+    Console.print(OUTPUT_LABELS.TOTAL_RESULT);
     this.printMap(userBridge);
 
-    Console.print(`\n게임 성공 여부: ${successOrNot}`);
-    Console.print(`총 시도한 횟수: ${tryCount}`);
+    Console.print(`\n${OUTPUT_LABELS.SUCCESS_OR_NOT}: ${successOrNot}`);
+    Console.print(`${OUTPUT_LABELS.TRY_COUNT}: ${tryCount}`);
   },
 };
 

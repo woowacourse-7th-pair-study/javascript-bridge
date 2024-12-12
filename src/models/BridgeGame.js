@@ -1,4 +1,5 @@
 import BridgeMaker from '../BridgeMaker.js';
+import { CAN_MOVE, CANNOT_MOVE, DO_NOT_SELECT, DOWN, UP } from '../constants/constants.js';
 import BridgeRandomNumberGenerator from '../utils/BridgeRandomNumberGenerator.js';
 
 /**
@@ -29,7 +30,7 @@ class BridgeGame {
    */
   checkTotalCannotMove() {
     return this.#userBridge.some((eachBridge) => {
-      return eachBridge.includes('X');
+      return eachBridge.includes(CANNOT_MOVE);
     });
   }
 
@@ -41,15 +42,15 @@ class BridgeGame {
    * @param {string} moving // U 또는 D
    */
   move(count, moving) {
-    if (moving === 'U') {
-      if (this.#bridge[count] === moving) this.#userBridge[0].push('O'); // 위 칸에 'O' 처리
-      else this.#userBridge[0].push('X'); // 위 칸에 'X' 처리
-      this.#userBridge[1].push(' '); // 선택하지 않은 아래 칸에 공백
+    if (moving === UP) {
+      if (this.#bridge[count] === moving) this.#userBridge[0].push(CAN_MOVE); // 위 칸에 'O' 처리
+      else this.#userBridge[0].push(CANNOT_MOVE); // 위 칸에 'X' 처리
+      this.#userBridge[1].push(DO_NOT_SELECT); // 선택하지 않은 아래 칸에 공백
     }
-    if (moving === 'D') {
-      if (this.#bridge[count] === moving) this.#userBridge[1].push('O'); // 아래 칸에 'O' 처리
-      else this.#userBridge[1].push('X'); // 아래 칸에 'X' 처리
-      this.#userBridge[0].push(' '); // 선택하지 않은 위 칸에 공백
+    if (moving === DOWN) {
+      if (this.#bridge[count] === moving) this.#userBridge[1].push(CAN_MOVE); // 아래 칸에 'O' 처리
+      else this.#userBridge[1].push(CANNOT_MOVE); // 아래 칸에 'X' 처리
+      this.#userBridge[0].push(DO_NOT_SELECT); // 선택하지 않은 위 칸에 공백
     }
   }
 

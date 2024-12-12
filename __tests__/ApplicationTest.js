@@ -1,7 +1,21 @@
 import App from '../src/App.js';
 import { MissionUtils } from '@woowacourse/mission-utils';
 import BridgeMaker from '../src/BridgeMaker.js';
-import { mockQuestions, mockRandoms } from '../src/utils/testUtils.js';
+import mockRandoms from '../src/utils/mockRandoms.js';
+
+const mockQuestions = (inputs) => {
+  MissionUtils.Console.readLineAsync = jest.fn();
+
+  MissionUtils.Console.readLineAsync.mockImplementation(() => {
+    const input = inputs.shift();
+
+    if (input === undefined) {
+      throw new Error('NO INPUT');
+    }
+
+    return Promise.resolve(input);
+  });
+};
 
 const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');

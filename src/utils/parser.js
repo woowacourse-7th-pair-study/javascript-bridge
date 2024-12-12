@@ -5,7 +5,6 @@ const stringToNumber = (string) => {
 
 const parser = {
   stringToNumber,
-  
 }
 
 export default parser;
