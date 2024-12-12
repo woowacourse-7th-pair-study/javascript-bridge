@@ -16,7 +16,6 @@ class BridgeGame {
   }
 
   getUserBridge() {
-    console.log(this.#userBridge);
     return this.#userBridge;
   }
 

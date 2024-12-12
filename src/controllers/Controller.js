@@ -26,16 +26,17 @@ class Controller {
       bridgeGame.move(count, moving);
       OutputView.printMap(bridgeGame.getUserBridge());
 
-      // 현재 moving이 이동할 수 없는 칸인지 확인 ('X' 인지 확인)
       hasX = bridgeGame.checkTotalCannotMove();
-      if (hasX) break;
+      if (hasX) break; // 현재 moving이 이동할 수 없는 칸('X')이면 break
     }
-    if (hasX) {
-      const gameCommand = await this.#getValidatedGameCommand();
-      if (gameCommand === RETRY) {
-        bridgeGame.retry();
-        await this.#bridgeGameSystem(bridgeSize, bridgeGame);
-      }
+    if (hasX) await this.#checkCannotMove(bridgeSize, bridgeGame);
+  }
+
+  async #checkCannotMove(bridgeSize, bridgeGame) {
+    const gameCommand = await this.#getValidatedGameCommand();
+    if (gameCommand === RETRY) {
+      bridgeGame.retry();
+      await this.#bridgeGameSystem(bridgeSize, bridgeGame);
     }
   }
 

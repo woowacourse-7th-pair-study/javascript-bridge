@@ -46,7 +46,7 @@ const OutputView = {
     let successOrNot = OUTPUT_LABELS.SUCCESS;
     if (hasTotalX) successOrNot = OUTPUT_LABELS.FAILED;
 
-    Console.print(OUTPUT_LABELS.TOTAL_RESULT);
+    Console.print(`\n${OUTPUT_LABELS.TOTAL_RESULT}`);
     this.printMap(userBridge);
 
     Console.print(`\n${OUTPUT_LABELS.SUCCESS_OR_NOT}: ${successOrNot}`);
