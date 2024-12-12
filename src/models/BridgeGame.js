@@ -51,13 +51,13 @@ class BridgeGame {
    */
   move(count, moving) {
     if (moving === 'U') {
-      if (this.#bridge[count] === moving) this.#userBridge[0].push('X'); // 위 칸에 'X' 처리
-      else this.#userBridge[0].push('O'); // 위 칸에 'O' 처리
+      if (this.#bridge[count] === moving) this.#userBridge[0].push('O'); // 위 칸에 'O' 처리
+      else this.#userBridge[0].push('X'); // 위 칸에 'X' 처리
       this.#userBridge[1].push(' '); // 선택하지 않은 아래 칸에 공백
     }
     if (moving === 'D') {
-      if (this.#bridge[count] === moving) this.#userBridge[1].push('X'); // 아래 칸에 'X' 처리
-      else this.#userBridge[1].push('O'); // 아래 칸에 'O' 처리
+      if (this.#bridge[count] === moving) this.#userBridge[1].push('O'); // 아래 칸에 'O' 처리
+      else this.#userBridge[1].push('X'); // 아래 칸에 'X' 처리
       this.#userBridge[0].push(' '); // 선택하지 않은 위 칸에 공백
     }
   }
