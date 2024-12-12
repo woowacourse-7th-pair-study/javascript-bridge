@@ -1,4 +1,4 @@
-import MissionUtils from '@woowacourse/mission-utils';
+import { MissionUtils } from '@woowacourse/mission-utils';
 import App from '../src/App.js';
 import BridgeMaker from '../src/BridgeMaker.js';
 
