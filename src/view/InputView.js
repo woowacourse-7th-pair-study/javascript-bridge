@@ -1,34 +1,34 @@
-const { Console } = require('@woowacourse/mission-utils');
+import { Console } from '@woowacourse/mission-utils';
 
-const INPUT_MESSAGE = require('../constant/input.js');
-const validateSize = require('../util/validateSize.js');
+import INPUT_MESSAGE from '../constant/input.js';
 
 const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize(callback) {
-    Console.readLine(INPUT_MESSAGE.size, (input) => {
-      try {
-        const size = Number(input);
-        validateSize(size);
-        callback(size);
-      } catch (e) {
-        Console.print(e.message);
-        this.readBridgeSize(callback);
-      }
-    });
+  async readBridgeSize() {
+    const input = await Console.readLineAsync(INPUT_MESSAGE.size);
+
+    return Number(input);
   },
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
    */
-  readMoving() {},
+  async readMoving() {
+    const input = await Console.readLineAsync(INPUT_MESSAGE.move);
+
+    return input;
+  },
 
   /**
    * 사용자가 게임을 다시 시도할지 종료할지 여부를 입력받는다.
    */
-  readGameCommand() {},
+  async readGameCommand() {
+    const input = await Console.readLineAsync(INPUT_MESSAGE.retry);
+
+    return input;
+  },
 };
 
-module.exports = InputView;
+export default InputView;

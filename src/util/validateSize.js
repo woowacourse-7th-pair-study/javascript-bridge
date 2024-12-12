@@ -1,4 +1,4 @@
-const ERROR_MESSAGE = require('../constant/error.js');
+import ERROR_MESSAGE from '../constant/error.js';
 
 const validateSize = (size) => {
   if (Number.isNaN(size)) {
@@ -14,4 +14,4 @@ const validateSize = (size) => {
   }
 };
 
-module.exports = validateSize;
+export default validateSize;

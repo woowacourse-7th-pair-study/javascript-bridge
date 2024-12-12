@@ -27,4 +27,4 @@ const BridgeMaker = {
   },
 };
 
-module.exports = BridgeMaker;
+export default BridgeMaker;

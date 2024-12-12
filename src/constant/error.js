@@ -4,4 +4,4 @@ const ERROR_MESSAGE = Object.freeze({
   range: '[ERROR]: 3이상 20이하의 값을 입력해 주세요.',
 });
 
-module.exports = ERROR_MESSAGE;
+export default ERROR_MESSAGE;
