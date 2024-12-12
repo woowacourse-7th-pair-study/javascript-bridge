@@ -12,7 +12,7 @@ const mockQuestions = (inputs) => {
   });
 };
 
-const mockRandoms = (numbers) => {
+export const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce(
     (acc, number) => acc.mockReturnValueOnce(number),

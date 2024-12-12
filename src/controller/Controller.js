@@ -51,17 +51,14 @@ class Controller {
     this.#isGameSuccess = true;
     for (let round = 0; round < bridgeSize; round++) {
       const movingInput = await this.#getValidatedMovingInput();
-
       const isMoveSuccess = this.#bridgeGame.move(movingInput);
       if (!isMoveSuccess) {
         OutputView.printMap(this.#bridgeGame.getCurrentMap());
         this.#isGameSuccess = false;
         break;
       }
-
       OutputView.printMap(this.#bridgeGame.getCurrentMap());
     }
-
     await this.#finishGame();
   }
 
